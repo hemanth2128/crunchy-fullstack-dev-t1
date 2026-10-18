@@ -78,7 +78,7 @@ and `Board` does one `setTasks(prev => …)` update.
 ```
 App
 └── Board                          [useState: tasks, search, priorityFilter]
-    │                              [useLocalStorage ×2 (custom hook): persistence]
+    │                              [useLocalStorage ×3 (custom hook): persistence]
     │                              [useEffect: document.title ← tasks]
     ├── FilterBar                  (controlled: search, priorityFilter)
     ├── AddTaskForm                [useState: title, description, priority, status,
@@ -97,13 +97,14 @@ App
 
 ```js
 const [tasks, setTasks] = useLocalStorage('t2.tasks', seedTasks);
-const [filters, setFilters] = useLocalStorage('t2.filters', { search: '', priorityFilter: 'all' });
+const [search, setSearch] = useLocalStorage('t2.search', '');
+const [priorityFilter, setPriorityFilter] = useLocalStorage('t2.priorityFilter', 'all');
 ```
 
 **Why this hook:** persistence logic (lazy initial read from localStorage, JSON
-serialise, try/catch on corrupt data) appeared for `tasks` *and* for `filters` —
-two call sites, identical logic. Extracting it removes the repetition and keeps
-`Board` focused on domain rules, not storage plumbing.
+serialise, try/catch on corrupt data) appeared for `tasks`, `search`, *and*
+`priorityFilter` — three call sites, identical logic. Extracting it removes the
+repetition and keeps `Board` focused on domain rules, not storage plumbing.
 
 ## 7. Effects inventory (every useEffect in the app)
 
@@ -128,7 +129,7 @@ are all computed **during render**.
 ## 9. Persistence & reset
 
 - `t2.tasks` — the board survives reload.
-- `t2.filters` — search/filter survive reload.
+- `t2.search`, `t2.priorityFilter` — search/filter survive reload.
 - Corrupt/absent storage falls back to seed data (try/catch in the hook).
 - A "Reset board" control restores seed data (also exercises the hook's setter).
 
