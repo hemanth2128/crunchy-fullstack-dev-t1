@@ -73,6 +73,12 @@ export default function Board() {
     setTasks((prev) => prev.filter((task) => task.id !== id));
   }
 
+  function handleReset() {
+    setTasks(seedTasks);
+    setSearch('');
+    setPriorityFilter('all');
+  }
+
   return (
     <main className="board">
       <div className="toolbar">
@@ -81,6 +87,7 @@ export default function Board() {
           priorityFilter={priorityFilter}
           onSearchChange={setSearch}
           onPriorityChange={setPriorityFilter}
+          onReset={handleReset}
           resultCount={visibleTasks.length}
           totalCount={tasks.length}
         />

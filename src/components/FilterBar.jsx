@@ -3,6 +3,7 @@ export default function FilterBar({
   priorityFilter,
   onSearchChange,
   onPriorityChange,
+  onReset,
   resultCount,
   totalCount,
 }) {
@@ -30,6 +31,9 @@ export default function FilterBar({
       <span className="filter-count">
         {resultCount} of {totalCount} tasks
       </span>
+      <button type="button" className="btn-reset" onClick={onReset}>
+        Reset board
+      </button>
     </section>
   );
 }
