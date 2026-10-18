@@ -1,0 +1,14 @@
+
+{
+  "name": "crunchy-fullstack-dev-t1",
+  "version": "1.0.0",
+  "description": "Task 1: ES6+ and the mental model — bug fixes and modernisation of an ES5 codebase",
+  "type": "module",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
